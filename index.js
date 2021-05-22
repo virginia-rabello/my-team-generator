@@ -112,7 +112,7 @@ const addEmployee = employeesData => {
                     return false;
                 }
             },
-            when: ({confirmEmployee}) => confirmEmployee
+            when: (answers) => answers.employeeChoice != 'Finish' && answers.confirmEmployee
         },
         {
             type: 'input',
@@ -126,7 +126,7 @@ const addEmployee = employeesData => {
                     return false;
                 }
             },
-            when: ({confirmEmployee}) => confirmEmployee
+            when: (answers) => answers.employeeChoice != 'Finish' && answers.confirmEmployee
         },
         {
             type: 'input',
@@ -140,7 +140,7 @@ const addEmployee = employeesData => {
                     return false;
                 }
             },
-            when: ({confirmEmployee}) => confirmEmployee
+            when: (answers) => answers.employeeChoice != 'Finish' && answers.confirmEmployee
         },
         {
             type: 'input',
@@ -208,7 +208,7 @@ manager()
 .then(addEmployee)
 .then(employeesData => {
     const page = generateHTML(employeesData);
-    writeToFile('index.html', page);
+    writeToFile('./dist/index.html', page);
   //  console.log(employeesData);
 })
 }

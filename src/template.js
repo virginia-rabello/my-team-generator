@@ -49,10 +49,10 @@ data.list.forEach(element => {
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
-<header>
-  My Team
+<header class="p-3 mb-2 bg-danger text-center text-white">
+  <h1>My Team</h1>
 </header>
-<body class="container-fluid">
+<body>
     <div id="team-cards" class="container mt-3 d-flex flex-wrap justify-content-around">
         ${generateCards(data)}
         ${employeesList}
