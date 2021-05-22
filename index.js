@@ -3,6 +3,7 @@ const inquirer = require('inquirer');
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
+const generateHTML = require('./src/template');
 
 const manager = () => {
     console.log(`
@@ -65,15 +66,17 @@ const manager = () => {
             }   
            }
         
-    ]);
-  
+    ]).then(manager => {
+        let theManager = new Manager(manager.manager, manager.email, manager.id, manager.office);
+        return theManager;
+    });
 
 };
 
 const addEmployee = employeesData => {
-    if(!employeesData.list){
+        if(!employeesData.list){
         employeesData.list = [];
-    }
+       }
     return inquirer.prompt([
         {
             type: 'confirm',
@@ -192,13 +195,21 @@ const addEmployee = employeesData => {
       
     });
 };
+function writeToFile(fileName, data) {
+    fs.writeFile(fileName, data, err => {
+        if (err) throw new Error (err);
 
+        console.log('HTML page generated with success!');
+    });
+};
 
 const init = () =>{
 manager()
 .then(addEmployee)
 .then(employeesData => {
-    console.log(employeesData);
+    const page = generateHTML(employeesData);
+    writeToFile('index.html', page);
+  //  console.log(employeesData);
 })
 }
 
